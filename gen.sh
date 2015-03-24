@@ -51,13 +51,13 @@ sed -i "s/^#RSAAuthentication yes$/RSAAuthentication yes/g" /etc/ssh/sshd_config
 echo "Setting PubkeyAuthentication yes..."
 sed -i "s/^#PubkeyAuthentication yes$/RSAAuthentication yes/g" /etc/ssh/sshd_config
 
-/etc/init.d/sshd restart
+service sshd restart
 
 echo "Please try logging in with key file, if it succeed please enter Y."
 read -p "e.g. ssh root@$myip -i ~/Documents/keys/id_rsa [Y/N]" loginsucceed
 if [ "$loginsucceed" = "Y" ] || [ "$loginsucceed" = "y" ]; then 
     sed -i "s/^PasswordAuthentication yes$/PasswordAuthentication no/g" /etc/ssh/sshd_config
-    /etc/init.d/sshd restart
+    service sshd restart
     echo "Done.You can add your key path to ~/.ssh/config to enable auto login."
     echo "Here is an example:"
     echo "========================================="
