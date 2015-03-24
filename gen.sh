@@ -58,7 +58,9 @@ read -p "e.g. ssh root@$myip -i ~/Documents/keys/id_rsa [Y/N]" loginsucceed
 if [ "$loginsucceed" = "Y" ] || [ "$loginsucceed" = "y" ]; then 
     sed -i "s/^PasswordAuthentication yes$/PasswordAuthentication no/g" /etc/ssh/sshd_config
     /etc/init.d/sshd restart
-    echo "Done."
+    echo "Done.You can also paste the private key to your ~/.ssh/id_rsa to enable auto login."
+    echo "Your private key is(don't forget to inclue the slashes before and after):"
+    cat /root/.ssh/id_rsa
 else
     echo "Script failed. Please check it manually."
 fi
