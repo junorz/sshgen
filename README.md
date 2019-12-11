@@ -1,6 +1,42 @@
+<h1>Introduction</h1>
+This script can be used to generate RSA key pair, and modify /etc/ssh/sshd_config automatically for you.
+After execution you'll be able to login server without password.
+
+<h1>How to use</h1>
+<h3>Download</h3>
+Please execute the following command in your server.
+<pre><code>
+git clone https://github.com/junorz/sshgen.git ~/.sshgen
+</code></pre>
+
+<h3>Execute</h3>
+<pre><code>
+bash ~/.sshgen/gen.sh
+</code></pre>
+
+<h3>Configuration</h3>
+<p>1.Please keep the file path by default（/root/.ssh/）.</p>
+<p>2.Download the file named "id_rsa" after message "Now please download id_rsa file you have generated just now and press Enter" shows.</p>
+<p><code>scp root@1.2.3.4:/root/.ssh/id_rsa ~/Documents/keys/id_rsa</code></p>
+<p>3.Open a new ssh session with private key after message "Please try logging in with key file, if it succeed please enter Y" shows.</p>
+<p><code>ssh root@1.2.3.4 -i ~/Documents/keys/id_rsa</code></p>
+<p>4.If you login successfully, press y in the previous session window. The script will disable the password login by modifying the file /etc/ssh/sshd_config.</p>
+<p>5.Please note that if you cannot login server successfully, press n or Ctrl+C to cancel the execution of script in the previous. Otherwise you will not be able to access your server anymore.</p>
+
+<h1>How to login without password</h1>
+<p>In MacOS, you can create(or append) the file in ~/.ssh/config like this:</p>
+<pre><code>
+Host linode1
+Hostname 1.2.3.4
+IdentityFile ~/Documents/keys/id_rsa
+User root
+</code></pre>
+now you can login your server by typing "ssh linode1".
+
+---
+
 <h1>概述</h1>
 此脚本可以在服务器上快速生成用于登录的公钥和私钥，并自动修改配置文件（/etc/ssh/sshd_config），达到禁用明文密码登录的效果，快速布置安全的服务器环境。
-
 
 <h1>使用方法</h1>
 <h3>下载脚本</h3>
